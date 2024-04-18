@@ -4,7 +4,7 @@ Node.js, Express, Passport, Mongoose, EJS y otros.
 
 
 
-### Usage
+### Instalar
 
 ```sh
 $ npm install
