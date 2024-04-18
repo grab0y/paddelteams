@@ -22,7 +22,10 @@ $ nodemon app.js
 
 ### .ENV FILE
 
+
+```sh
 Archivo .ENV debe incluir:
     EMAIL_USER=tuemail@email.com
     EMAIL_PASS=tupassword
 
+```
