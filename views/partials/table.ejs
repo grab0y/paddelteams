@@ -1,0 +1,42 @@
+<!-- Display matches -->
+<div id="dashboardContainer">
+    <% if(matches.length > 0) { %>
+      <h2>All Matches:</h2>
+      <table class="table">
+          <thead>
+              <tr>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Court</th>
+                  <th>Category</th>
+                  <th>Players Needed</th>
+                  <th>Created By</th>
+                  <th>Creator Phone Number</th> <!-- esta linea se borrará luego.-->
+                  <!-- Add more columns as needed -->
+              </tr>
+          </thead>
+          <tbody>
+              <% matches.forEach(match => { %>
+                  <tr>
+                      <!-- Adjust the date to match the user's timezone -->
+                      <% const utcDate = new Date(match.day); %>
+                      <% const localDate = new Date(utcDate.getTime() + (utcDate.getTimezoneOffset() * 60000)); %>
+                      <% const day = localDate.getDate().toString().padStart(2, '0'); %>
+                      <% const month = (localDate.getMonth() + 1).toString().padStart(2, '0'); %>
+                      <% const year = localDate.getFullYear(); %>
+                      <td><%= day %>/<%= month %>/<%= year %></td>
+                      <td><%= match.time %></td>
+                      <td><%= match.court %></td>
+                      <td><%= match.categoria %></td>
+                      <td><%= match.faltantes %></td>
+                      <td><%= match.creatorName %></td>
+                      <td><%= match.creatorPhoneNumber %></td> <!-- esta linea se borrará luego.-->
+                      <!-- Add more columns as needed -->
+                  </tr>
+              <% }); %>
+          </tbody>
+      </table>
+    <% } else { %>
+      <p>No matches available.</p>
+    <% } %>
+    </div>

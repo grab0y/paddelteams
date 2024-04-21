@@ -24,7 +24,7 @@ $ nodemon app.js
 
 
 ```sh
-Archivo .ENV debe incluir:
+Archivo .ENV debe incluir para habilitar validación de cuenta x email:
     EMAIL_USER=tuemail@email.com
     EMAIL_PASS=tupassword
 
