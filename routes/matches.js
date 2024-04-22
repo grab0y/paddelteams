@@ -41,5 +41,45 @@ router.post('/add',  async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   });
+  
+
+
+
+  // Endpoint to edit match details
+router.post('/edit', async (req, res) => {
+  try {
+      const matchId = req.body.matchId;
+      const updatedFaltantes = req.body.faltantes;
+
+      // Update the 'faltantes' field of the match
+      await Match.findByIdAndUpdate(matchId, { faltantes: updatedFaltantes });
+      req.flash('success_msg', '¡Tu partido ha sido editado!');
+
+      // Redirect to dashboard or send a success response
+      res.redirect('/dashboard');
+  } catch (error) {
+      console.error('Error editing match:', error);
+      res.status(500).send('Error editing match');
+  }
+});
+
+// Endpoint to remove a match by ID
+router.post('/remove', async (req, res) => {
+  try {
+      const matchId = req.body.matchId1;
+      
+
+      // Remove the match from the database
+      await Match.findByIdAndRemove(matchId);
+      console.log("Partido eliminado. ID: ", matchId);
+      req.flash('success_msg', '¡Tu partido ha sido elimiado!');
+
+      // Redirect to dashboard or send a success response
+      res.redirect('/dashboard');
+  } catch (error) {
+      console.error('Error removing match:', error);
+      res.status(500).send('Error removing match');
+  }
+});
 
   module.exports = router;

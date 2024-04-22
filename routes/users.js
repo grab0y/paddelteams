@@ -89,7 +89,7 @@ router.post('/register', async (req, res) => {
     await sendVerificationEmail(newUser.email, verificationToken)
 
     // Send verification email
-    req.flash('success_msg', 'You are now registered and can log in');
+    req.flash('success_msg', '¡Ya estas registrado! Revisa tu email para validar tu cuenta.');
     res.redirect('/users/login');
     console.log("Nuevo usuario registrado: ", newUser.name);
   } catch (error) {
@@ -110,7 +110,7 @@ router.post('/availability', ensureAuthenticated, (req, res) => {
   User.findByIdAndUpdate(userId, { disponibilidad: newStatus }, (err, user) => {
     if (err) {
       console.error('Error updating user availability:', err);
-      req.flash('error_msg', 'Error updating user availability');
+      req.flash('error_msg', 'Error al actualizar tu estado.');
     } else {
       req.flash('success_msg', '¡Tu estado ha sido actualizado!');
     }

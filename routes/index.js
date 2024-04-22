@@ -19,35 +19,17 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) => {
         const userId = req.user.id;
         const user = await User.findById(userId, "disponibilidad verified");
 
+       //  const isOwner = []
+
         // Query MongoDB to retrieve all matches
         const matches = await Match.find();
 
         // Array to store match data with creator names and phone numbers
         const matchesWithCreatorData = [];
 
-        // Iterate over matches to fetch creator data
-        for (const match of matches) {
-            try {
-                // Fetch the user's data using the createdBy ID
-                const creator = await User.findById(match.createdBy);
-                // Add match data along with creator name and phone number to the array
-                matchesWithCreatorData.push({
-                    ...match.toObject(),
-                    creatorName: creator ? creator.name : 'Unknown', // Use 'Unknown' if user not found
-                    creatorPhoneNumber: creator ? creator.telefono : 'Unknown' // Use 'Unknown' if user not found
-                });
-            } catch (error) {
-                console.error('Error fetching creator data:', error);
-                // If an error occurs, add match data with 'Unknown' creator name and phone number
-                matchesWithCreatorData.push({
-                    ...match.toObject(),
-                    creatorName: 'Unknown',
-                    creatorPhoneNumber: 'Unknown'
-                });
-            }
-        }
+        
 
-        console.log('Usuario encontrado:', user, req.user.name);
+        console.log('Usuario encontrado:', req.user.name, req.user.id);
 
         const selectedCategory = req.query.categoria;
         let users = [];
@@ -62,8 +44,9 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) => {
             user: req.user,
             disponibilidad: user.disponibilidad,
             users: users,
-            selectedCategory: selectedCategory || '',
-            matches: matchesWithCreatorData
+            selectedCategory: selectedCategory || ''
+            
+            
         });
     } catch (err) {
         console.error('Error retrieving user availability or users:', err);
@@ -90,11 +73,16 @@ router.get('/dashboard/table', ensureAuthenticated, async (req, res) => {
             try {
                 // Fetch the user's data using the createdBy ID
                 const creator = await User.findById(match.createdBy);
+
+                // Checkear si el usuario es el creador
+                const isOwner = (match.createdBy === userId);
+                // console.log("owner: ", creator.id, "Usuario: ", req.user.id);
                 // Add match data along with creator name and phone number to the array
                 matchesWithCreatorData.push({
                     ...match.toObject(),
                     creatorName: creator ? creator.name : 'Unknown', // Use 'Unknown' if user not found
-                    creatorPhoneNumber: creator ? creator.telefono : 'Unknown' // Use 'Unknown' if user not found
+                    creatorPhoneNumber: creator ? creator.telefono : 'Unknown', // Use 'Unknown' if user not found
+                    isOwner: isOwner
                 });
             } catch (error) {
                 console.error('Error fetching creator data:', error);
@@ -102,7 +90,9 @@ router.get('/dashboard/table', ensureAuthenticated, async (req, res) => {
                 matchesWithCreatorData.push({
                     ...match.toObject(),
                     creatorName: 'Unknown',
-                    creatorPhoneNumber: 'Unknown'
+                    creatorPhoneNumber: 'Unknown',
+                    isOwner: false
+
                 });
             }
         }

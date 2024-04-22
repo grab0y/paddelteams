@@ -18,6 +18,11 @@ function handleRefreshButtonClick() {
     fetchAndUpdateTable();
 }
 
+// Function to automatically refresh table data at regular intervals
+function autoRefreshTable(interval) {
+    setInterval(fetchAndUpdateTable, interval);
+}
+
 // Wait for the DOM to be fully loaded before attaching event listeners
 document.addEventListener('DOMContentLoaded', function() {
     // Attach event listener to the refresh button
@@ -27,6 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.error('Refresh button not found.');
     }
+
+    // Set interval for auto-refreshing table data (every 5 minutes in this example)
+    autoRefreshTable(5 * 60 * 1000); // 5 minutes in milliseconds
 });
 
 // Fetch and update table data initially when the page loads
