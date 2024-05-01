@@ -32,7 +32,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
       subject: 'Por favor, verifica tu correo electrónico',
       html: `<p>Hola ${user.name},</p>
              <p>Por favor, haz clic en el siguiente enlace para verificar tu correo electrónico:</p>
-             <p><a href="http://localhost:5000/users/verify?userId=${user._id}&token=${verificationToken}">Verificar correo electrónico</a></p>`
+             <p><a href="paddel.team:3000/users/verify?userId=${user._id}&token=${verificationToken}">Verificar correo electrónico</a></p>`
     };
 
     // Send email
