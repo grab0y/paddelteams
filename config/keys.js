@@ -1,5 +1,5 @@
 
 
 module.exports ={
-    mongoURI: 'mongodb://localhost:27017/'
+    mongoURI: 'mongodb+srv://gaston:itisadog123@cluster0.04mocwl.mongodb.net/'
 }
