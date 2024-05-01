@@ -129,11 +129,16 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-// Logout
+// Logout route
 router.get('/logout', (req, res) => {
-  req.logout();
-  req.flash('success_msg', '¡Te esperamos pronto!');
-  res.redirect('/users/login');
+  req.logout((err) => {
+      if (err) {
+          console.error('Error logging out:', err);
+          return res.status(500).send('Failed to log out');
+      }
+      req.flash('success_msg', '¡Te esperamos pronto!');
+      res.redirect('/users/login');
+  });
 });
 
 
