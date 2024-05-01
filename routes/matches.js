@@ -17,7 +17,7 @@ const { ensureAuthenticated } = require('../config/auth');
 // Route for adding a new match invitation
 router.post('/add',  async (req, res) => {
     try {
-      const { day, time, court, categoria, faltantes } = req.body;
+      const { day, time, court, categoria, faltantes, comentarios } = req.body;
   
       // Assuming user information is stored in req.user after authentication
       const userId = req.user._id; // Assuming user ID is stored in _id field
@@ -30,7 +30,8 @@ router.post('/add',  async (req, res) => {
         court,
         categoria,
         faltantes,
-        createdBy: userId, // Assuming you have a createdBy field in your Match schema
+        createdBy: userId,
+        comentarios, // Assuming you have a createdBy field in your Match schema
       });
   
       await newMatch.save();

@@ -38,6 +38,11 @@ const matchSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    comentarios: {
+        type: String,
+        required: true,
+        default: "¡Sumate a jugar con nosotros!"
     }
 
 });
