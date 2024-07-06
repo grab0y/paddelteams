@@ -6,24 +6,37 @@
 
 <%- include('partials/messages') %>
 
-<h1 class="mt-4">Tu Perfil</h1>
-<p class="lead mb-3">Hola <%= user.name %>!</p>
+<div class="row align-items-center">
+    <div class="col-md-8">
+        <h1 class="mt-4">Tu Perfil</h1>
+        <p class="lead mb-3">Hola <%= user.name %>!</p>
+    </div>
 
-<% if (!user.verified) { %>
-    <p>¡Tu cuenta aún no ha sido verificada!</p>
-<% } %>
+    <div class="col-md-4">
+        <p>Tu estado: <%= disponibilidad ? 'Disponible' : 'Ocupado' %></p>
+        <form id="availabilityForm" method="POST" action="/users/availability">
+            <input type="hidden" name="available" id="availabilityInput" value="">
+            <button type="button" id="onlineBtn" class="btn btn-success">¡Estoy disponible!</button>
+            <button type="button" id="offlineBtn" class="btn btn-danger">Estoy Ocupado</button>
+        </form>
+    </div>
+</div>
 
-<p>Tu estado: <%= disponibilidad ? 'Disponible' : 'Ocupado' %></p>
+
+
+
+    <% if (!user.verified) { %>
+        <p>¡Tu cuenta aún no ha sido verificada!</p>
+    <% } %>
 
 
 
 
 
-<form id="availabilityForm" method="POST" action="/users/availability">
-    <input type="hidden" name="available" id="availabilityInput" value="">
-    <button type="button" id="onlineBtn" class="btn btn-success">¡Estoy disponible!</button>
-    <button type="button" id="offlineBtn" class="btn btn-danger">Estoy Ocupado</button>
-</form>
+
+
+
+
 
 
 <!-- Button to Show Modal -->

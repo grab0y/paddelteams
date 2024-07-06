@@ -1,12 +1,12 @@
 h1 {
-    color: red; /* Change 'red' to your desired color */
+    color: rgb(255, 255, 255); /* Change 'red' to your desired color */
 }
 
 
 
 
 .background-div {
-    background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value (last parameter) to control the transparency */
+    background-color: rgb(255, 0, 0); /* Adjust the alpha value (last parameter) to control the transparency */
     /* Add other styles as needed */
 }
 
